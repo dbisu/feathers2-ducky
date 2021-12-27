@@ -40,9 +40,9 @@ Install and have your USB Rubber Ducky working in less than 5 minutes.
 
 10. Copy boot.py, code.py, ducyinpython.py, webapp.py, and wsgserver.py to the root of the FeatherS2.
 
-11. Find a script [here](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads) or [create your own one using Ducky Script](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript) and save it as `payload.dd` in the Pico.
+11. Find a script [here](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads) or [create your own one using Ducky Script](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript) and save it as `payload.dd` on the FeatherS2.
 
-12. Create the file `secrets.py` in the root of the FeatherS2.  This contains the AP name and password to be created by the FeatherS2.
+12. Create the file `secrets.py` in the root of the FeatherS2.  This contains the AP name and password to be created by the FeatherS2.   
 `secrets = {
     'ssid' : "BadAPName",
     'password' : "badpassword"
