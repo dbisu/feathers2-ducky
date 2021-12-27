@@ -28,89 +28,47 @@ Install and have your USB Rubber Ducky working in less than 5 minutes.
 
 4. Download `adafruit-circuitpython-bundle-7.x-mpy-YYYYMMDD.zip` [here](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/latest) and extract it outside the device.
 
-5. Navigate to `lib` in the recently extracted folder and copy `adafruit_hid` to the `lib` folder in your FeatherS2.
+5. Navigate to `lib` in the recently extracted folder and copy `adafruit_hid` to the `lib` folder on your FeatherS2.
 
-6. Click [here](https://raw.githubusercontent.com/dbisu/feathers2-ducky/main/duckyinpython.py), press CTRL + S and save the file as `code.py` in the root of the FeatherS2, overwriting the previous file.
+6. Also from `lib`, copy adafruit_wsgi to the `lib` folder on  your FeatherS2.
 
-7. Find a script [here](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads) or [create your own one using Ducky Script](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript) and save it as `payload.dd` in the Pico.
+7. Connect pin IO35 (`IO35`) to pin 4 (`GND`).  This will enable setup mode once the files are copied to the FeatherS2.
 
-8. Be careful, if your device isn't in [setup mode](#setup-mode), the device will reboot and after half a second, the script will run.
+8. Download boot.py, code.py, ducyinpython.py, webapp.py, and wsgserver.py.
+
+9. Download `adafruit_wsgi/wsgi_app.py` and copy to `lib/adafruit_wsgi` on the FeatherS2.  Remove `wsgi_app.mpy` from that folder.
+
+10. Copy boot.py, code.py, ducyinpython.py, webapp.py, and wsgserver.py to the root of the FeatherS2.
+
+11. Find a script [here](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads) or [create your own one using Ducky Script](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Duckyscript) and save it as `payload.dd` in the Pico.
+
+12. Create the file `secrets.py` in the root of the FeatherS2.  This contains the AP name and password to be created by the FeatherS2.
+`secrets = {
+    'ssid' : "BadAPName",
+    'password' : "badpassword"
+}`
+
+13. Unplug the FeatherS2, remove the jumper from `IO35`, and plug back in your FeatherS2.
+
+14. The FeatherS2 should reboot into AP mode, serving from the address of `http://192.168.4.1`
+
+15. Navigating to `http://192.168.4.1` should list out the available payloads.  You can run the scripts from the menus.
+
+## Notes
+
+Editing scripts is currently broken.  To be fixed soon.
 
 ### Setup mode
 
-To edit the payload, enter setup mode by connecting the pin IO37 (`IO35`) to pin 4 (`GND`), this will stop the feathers2-ducky from injecting the payload in your own machine.
+To edit the payload, enter setup mode by connecting the pin IO37 (`IO35`) to pin 4 (`GND`), this will stop the feathers2-ducky from starting the Wifi and will reenable USB drive function.
 The easiest way to so is by using a jumper wire between those pins as seen bellow.
 
 ![Setup mode with a jumper](images/setup-mode.png)
 
-### USB enable/disable mode
-
-If you need the pico-ducky to not show up as a USB mass storage device for stealth, follow these instructions.  
-Enter setup mode.  
-Copy boot.py to the root of the feathers2-ducky.  
-Copy your payload script to the feathers2-ducky.  
-Disconnect the pico from your host PC.
-Connect a jumper wire between pin 18 and pin 20.
-This will prevent the feathers2-ducky from showing up as a USB drive when plugged into the target computer.  
-Remove the jumper and reconnect to your PC to reprogram.
-The default mode is USB mass storage enabled.   
-
-![USB enable/disable mode](images/usb-boot-mode.png)
 
 ### Changing Keyboard Layouts
 
-Copied from [Neradoc/Circuitpython_Keyboard_Layouts](https://github.com/Neradoc/Circuitpython_Keyboard_Layouts/blob/main/PICODUCKY.md)  
-
-#### How to use one of these layouts with the pico-ducky repository.
-
-**Go to the [latest release page](https://github.com/Neradoc/Circuitpython_Keyboard_Layouts/releases/latest), look if your language is in the list.**
-
-#### If your language/layout is in the bundle
-
-Download the `py` zip, named `circuitpython-keyboard-layouts-py-XXXXXXXX.zip`
-
-**NOTE: You can use the mpy version targetting the version of Circuitpython that is on the device, but on Raspberry Pi Pico you don't need it - they only reduce file size and memory use on load, which the pico has plenty of.**
-
-#### If your language/layout is not in the bundle
-
-Try the online generator, it should get you a zip file with the bundles for yout language
-
-https://www.neradoc.me/layouts/
-
-#### Now you have a zip file
-
-#### Find your language/layout in the lib directory
-
-For a language `LANG`, copy the following files from the zip's `lib` folder to the `lib` directory of the board.  
-**DO NOT** modify the adafruit_hid directory. Your files go directly in `lib`.  
-**DO NOT** change the names or extensions of the files. Just pick the right ones.  
-Replace `LANG` with the letters for your language of choice.
-
-- `keyboard_layout.py`
-- `keyboard_layout_win_LANG.py`
-- `keycode_win_LANG.py`
-
-Don't forget to get [the adafruit_hid library](https://github.com/adafruit/Adafruit_CircuitPython_HID/releases/latest).
-
-This is what it should look like **if your language is French for example**.
-
-![CIRCUITPY drive screenshot](https://github.com/Neradoc/Circuitpython_Keyboard_Layouts/raw/main/docs/drive_pico_ducky.png)
-
-#### Modify the pico-ducky code to use your language file:
-
-At the start of the file comment out these lines:
-
-```py
-from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS as KeyboardLayout
-from adafruit_hid.keycode import Keycode
-```
-
-Uncomment these lines:  
-*Replace `LANG` with the letters for your language of choice. The name must match the file (without the py or mpy extension).*
-```py
-from keyboard_layout_win_LANG import KeyboardLayout
-from keycode_win_LANG import Keycode
-```
+See the [Wiki](https://github.com/dbisu/feathers2-ducky/wiki)
 
 ## Useful links and resources
 
