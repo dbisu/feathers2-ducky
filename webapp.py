@@ -92,6 +92,11 @@ def ducky_main(request):
 
     return(response)
 
+def cleanup_text(buffer):
+    return_buffer = buffer.replace('+', ' ').replace('%0D%0A', '\n') + '\n'
+    #print(return_buffer)
+    return(return_buffer)
+
 web_app = WSGIApp()
 
 @web_app.route("/ducky")
@@ -126,6 +131,7 @@ def write_script(request, filename):
     storage.remount("/",readonly=False)
     f = open(filename,"w",encoding='utf-8')
     textbuffer = form_data['scriptData']
+    textbuffer = cleanup_text(textbuffer)
     #print(textbuffer)
     for line in textbuffer:
         f.write(line)
@@ -149,6 +155,7 @@ def write_new_script(request):
         #print(form_data)
         filename = form_data['scriptName']
         textbuffer = form_data['scriptData']
+        textbuffer = cleanup_text(textbuffer)
         storage.remount("/",readonly=False)
         f = open(filename,"w",encoding='utf-8')
         for line in textbuffer:

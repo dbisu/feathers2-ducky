@@ -20,7 +20,7 @@
 
 Install and have your USB Rubber Ducky working in less than 5 minutes.
 
-1. Download [CircuitPython for the FeatherS2](https://circuitpython.org/board/unexpectedmaker_feathers2/). Currently versin 7.0.0
+1. Download [CircuitPython for the FeatherS2](https://circuitpython.org/board/unexpectedmaker_feathers2/). Currently version is 7.0.0
 
 2. Plug the device into a USB port. Press the Reset button, then within a second it the boot button. It will show up as a removable media device named `UFTHRS2BOOT`.
 
@@ -54,11 +54,9 @@ Install and have your USB Rubber Ducky working in less than 5 minutes.
 
 15. Navigating to `http://192.168.4.1` should list out the available payloads.  You can run the scripts from the menus.
 
-## Notes
 
-Editing scripts is currently broken.  To be fixed soon.
 
-### Setup mode
+## Setup mode
 
 To edit the payload, enter setup mode by connecting the pin IO35 (`IO35`) to pin 4 (`GND`), this will stop the feathers2-ducky from starting the Wifi and will reenable USB drive function.
 The easiest way to so is by using a jumper wire between those pins.
