@@ -38,7 +38,7 @@ Install and have your USB Rubber Ducky working in less than 5 minutes.
 
 ### Setup mode
 
-To edit the payload, enter setup mode by connecting the pin IO37 (`IO37`) to pin 4 (`GND`), this will stop the feathers2-ducky from injecting the payload in your own machine.
+To edit the payload, enter setup mode by connecting the pin IO37 (`IO35`) to pin 4 (`GND`), this will stop the feathers2-ducky from injecting the payload in your own machine.
 The easiest way to so is by using a jumper wire between those pins as seen bellow.
 
 ![Setup mode with a jumper](images/setup-mode.png)

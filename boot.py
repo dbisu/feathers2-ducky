@@ -12,7 +12,7 @@ noStoragePin = digitalio.DigitalInOut(IO35)
 noStoragePin.switch_to_input(pull=digitalio.Pull.UP)
 noStorageStatus = not noStoragePin.value
 
-if(noStorageStatus == True):
+if(noStorageStatus == False):
     # don't show USB drive to host PC
     storage.disable_usb_drive()
     print("Disabling USB drive")

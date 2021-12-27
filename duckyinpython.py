@@ -20,6 +20,10 @@ import time
 import digitalio
 from board import *
 
+kbd = Keyboard(usb_hid.devices)
+layout = KeyboardLayout(kbd)
+
+
 duckyCommands = {
     'WINDOWS': Keycode.WINDOWS, 'GUI': Keycode.GUI,
     'APP': Keycode.APPLICATION, 'MENU': Keycode.APPLICATION, 'SHIFT': Keycode.SHIFT,
@@ -32,6 +36,7 @@ duckyCommands = {
     'INSERT': Keycode.INSERT, 'NUMLOCK': Keycode.KEYPAD_NUMLOCK, 'PAGEUP': Keycode.PAGE_UP,
     'PAGEDOWN': Keycode.PAGE_DOWN, 'PRINTSCREEN': Keycode.PRINT_SCREEN, 'ENTER': Keycode.ENTER,
     'SCROLLLOCK': Keycode.SCROLL_LOCK, 'SPACE': Keycode.SPACE, 'TAB': Keycode.TAB,
+    'BACKSPACE': Keycode.BACKSPACE, 'DELETE': Keycode.DELETE,
     'A': Keycode.A, 'B': Keycode.B, 'C': Keycode.C, 'D': Keycode.D, 'E': Keycode.E,
     'F': Keycode.F, 'G': Keycode.G, 'H': Keycode.H, 'I': Keycode.I, 'J': Keycode.J,
     'K': Keycode.K, 'L': Keycode.L, 'M': Keycode.M, 'N': Keycode.N, 'O': Keycode.O,
@@ -88,24 +93,13 @@ def parseLine(line):
         newScriptLine = convertLine(line)
         runScriptLine(newScriptLine)
 
-kbd = Keyboard(usb_hid.devices)
-layout = KeyboardLayout(kbd)
-
-# sleep at the start to allow the device to be recognized by the host computer
-time.sleep(.5)
-
-# check GP0 for setup mode
-# see setup mode for instructions
-progStatus = False
-progStatusPin = digitalio.DigitalInOut(IO37)
-progStatusPin.switch_to_input(pull=digitalio.Pull.UP)
-progStatus = not progStatusPin.value
 defaultDelay = 0
-if(progStatus == False):
-    # not in setup mode, inject the payload
-    duckyScriptPath = "payload.dd"
+
+def runScript(file):
+    global defaultDelay
+
+    duckyScriptPath = file
     f = open(duckyScriptPath,"r",encoding='utf-8')
-    print("Running payload.dd")
     previousLine = ""
     duckyScript = f.readlines()
     for line in duckyScript:
@@ -119,7 +113,3 @@ if(progStatus == False):
             parseLine(line)
             previousLine = line
         time.sleep(float(defaultDelay)/1000)
-
-    print("Done")
-else:
-    print("Update your payload")
