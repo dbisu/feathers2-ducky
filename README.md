@@ -61,9 +61,9 @@ Editing scripts is currently broken.  To be fixed soon.
 ### Setup mode
 
 To edit the payload, enter setup mode by connecting the pin IO37 (`IO35`) to pin 4 (`GND`), this will stop the feathers2-ducky from starting the Wifi and will reenable USB drive function.
-The easiest way to so is by using a jumper wire between those pins as seen bellow.
+The easiest way to so is by using a jumper wire between those pins.
 
-![Setup mode with a jumper](images/setup-mode.png)
+![FeatherS2 pinout](https://feathers2.io/images/feathers2_pinout_extended2.jpg)
 
 
 ### Changing Keyboard Layouts
