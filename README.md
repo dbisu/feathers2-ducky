@@ -63,8 +63,13 @@ The easiest way to so is by using a jumper wire between those pins.
 
 ![FeatherS2 pinout](https://feathers2.io/images/feathers2_pinout_extended2.jpg)
 
+### Example w/ Hardware Switch
 
-### Changing Keyboard Layouts
+![FeatherS2 switch front](https://github.com/dbisu/feathers2-ducky/images/feathers2ducky-front.png)
+
+![FeatherS2 switch back](https://github.com/dbisu/feathers2-ducky/images/feathers2ducky-back.png)
+
+## Changing Keyboard Layouts
 
 See the [Wiki](https://github.com/dbisu/feathers2-ducky/wiki)
 
