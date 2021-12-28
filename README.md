@@ -65,9 +65,9 @@ The easiest way to so is by using a jumper wire between those pins.
 
 ### Example w/ Hardware Switch
 
-![FeatherS2 switch front](https://github.com/dbisu/feathers2-ducky/images/feathers2ducky-front.png)
+![FeatherS2 switch front](images/feathers2ducky-front.png)
 
-![FeatherS2 switch back](https://github.com/dbisu/feathers2-ducky/images/feathers2ducky-back.png)
+![FeatherS2 switch back](images/feathers2ducky-back.png)
 
 ## Changing Keyboard Layouts
 
