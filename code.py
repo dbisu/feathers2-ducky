@@ -23,6 +23,7 @@ from duckyinpython import *
 import wifi
 from webapp import *
 
+import supervisor
 
 # sleep at the start to allow the device to be recognized by the host computer
 time.sleep(.5)
@@ -41,6 +42,10 @@ def startWiFi():
     HOST = repr(wifi.radio.ipv4_address_ap)
     PORT = 80        # Port to listen on
     print(HOST,PORT)
+
+# turn off automatically reloading when files are written to the pico
+supervisor.disable_autoreload()
+
 
 # check GP0 for setup mode
 # see setup mode for instructions

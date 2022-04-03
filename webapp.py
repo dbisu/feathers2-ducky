@@ -75,6 +75,27 @@ response_html = """<!DOCTYPE html>
 
 newrow_html = "<tr><td>{}</td><td><a href='/edit/{}'>Edit</a> / <a href='/run/{}'>Run</a></tr>"
 
+def selectPayload(payload_number):
+    if(payload_number == 1):
+        payload = "payload.dd"
+
+    elif(payload_number == 2):
+        payload = "payload2.dd"
+
+    elif(payload_number == 3):
+        payload = "payload3.dd"
+
+    elif(payload_number == 4):
+        payload = "payload4.dd"
+
+    else:
+        # if all pins are high, then no switch is present
+        # default to payload1
+        payload = "payload.dd"
+
+    return(payload)
+
+
 def ducky_main(request):
     print("Ducky main")
     payloads = []
@@ -177,6 +198,15 @@ def run_script(request, filename):
 def index(request):
     response = ducky_main(request)
     return("200 OK", [('Content-Type', 'text/html')], response)
+
+@web_app.route("/api/run/<filenumber>")
+def run_script(request, filenumber):
+    filename = selectPayload(int(filenumber))
+    print("run_script ", filenumber)
+    response = response_html.format("Running script " + filename)
+    #print(response)
+    runScript(filename)
+    return("200 OK",[('Content-Type', 'text/html')], response)
 
 def startWebService():
 
